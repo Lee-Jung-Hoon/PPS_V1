@@ -1,31 +1,33 @@
+<%@ include file="/WEB-INF/views/include/header.jsp"%>
 <%@ page contentType="text/html; charset=UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ page session="false"%>
 <!DOCTYPE html>
+<html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=euc-kr" />
-<title>Home</title>
+<meta charset="UTF-8">
+<title>앵귤러js 3일</title>
 </head>
-<h1>Board List</h1>
-<table border="1">
-	<thead>
-		<tr>
-			<th>번호</th>
-			<th>제목</th>
-			<th>등록일</th>
-			<th>추천수</th>
-			<th>조회수</th>
-		</tr>
-	</thead>
-	<tbody>
-		<c:forEach var="item" items="${list}">
-			<tr>
-				<td>${item.itemId}</td>
-				<td>${item.title}</td>
-				<td>${item.rgstDate}</td>
-				<td>${item.rcmdCnt}</td>
-				<td>${item.readCnt}</td>
-			</tr>
-		</c:forEach>
-	</tbody>
-</table>
+<script>
+	var mainApp = angular.module("mainApp", []);
+	mainApp.controller('menuController', function($scope) {
+		$scope.menu = {
+			menuName:"짜장면",
+			price:"5000",
+			
+			menuList:function() {
+				var menuObject; // 메뉴 오브젝트
+				menuObject = $scope.menu;
+				return menuObject.menuName + " " + menuObject.price + "원";
+			}
+		};
+	});
+</script>
+<body>
+	<h1>Angularjs 연습중</h1>
+	<div ng-app="mainApp" ng-controller="menuController">
+		메뉴이름: <input type="text" ng-model="menu.menuName"><br><br>
+		가격: <input type="text" ng-model="menu.price"><br><br>
+		
+		현재 입력한 값 : {{menu.menuList()}}		
+	</div>
+</body>
+</html>
